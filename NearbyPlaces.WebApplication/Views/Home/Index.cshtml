@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "How to get nearby places?";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/nearbyplaces.js"></script>
+
+</head>
+
+<body style="padding:100px;" ng-app="nearbyPlacesList" ng-controller="nearbyPlacesController">
+    <table>
+        <tr>
+            <td>
+                <input type="text" class="input-lg" id="inputLatitude" ng-model="latitude" placeholder="Latitude..." />
+            </td>
+            <td>
+                <input type="text" class="input-lg" id="inputLongitude" ng-model="longitude" placeholder="Longitude..." />
+            </td>
+            <td>
+                <input type="text" class="input-lg" id="inputRadius" ng-model="radius" placeholder="Radius..." />
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-lg" ng-click="getClick()">Get nearby places!</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <ul class="w3-ul" style="margin-top:30px;">
+        <li ng-repeat="x in places" class="w3-padding-16">{{x}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+    </ul>
+</body>
+
