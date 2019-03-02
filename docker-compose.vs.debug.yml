@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  nearbyplaces.webapi:
+    image: nearbyplaces.webapi:dev
+    build:
+      args:
+        source: ${DOCKER_BUILD_SOURCE}
+    volumes:
+      - .\NearbyPlaces.WebApi:C:\inetpub\wwwroot
+      - ~\msvsmon:C:\msvsmon:ro
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=windows"
