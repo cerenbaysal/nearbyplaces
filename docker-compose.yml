@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  nearbyplaces.webapi:
-    image: nearbyplaces.webapi
-    build:
-      context: .\NearbyPlaces.WebApi
-      dockerfile: Dockerfile
