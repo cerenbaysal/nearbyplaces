@@ -12,7 +12,7 @@ namespace NearbyPlaces.DataAccess
     {
         public List<string> GetPlaces(string latitude, string longitude, string radius)
         {
-            var redis = ConnectionMultiplexer.Connect("localhost");
+            var redis = ConnectionMultiplexer.Connect("nearbyplacesredis.redis.cache.windows.net:6380,password=Bxkqg8Jr9mC35oSzfESy7M1p7o69caLXsOSfJPJ6ghM=,ssl=True,abortConnect=False");
             var db = redis.GetDatabase();
             var key = latitude + ":" + longitude + ":" + radius;
 
@@ -29,7 +29,7 @@ namespace NearbyPlaces.DataAccess
 
         public void InsertPlaces(string latitude, string longitude, string radius, List<string> places)
         {
-            var redis = ConnectionMultiplexer.Connect("localhost");
+            var redis = ConnectionMultiplexer.Connect("nearbyplacesredis.redis.cache.windows.net:6380,password=Bxkqg8Jr9mC35oSzfESy7M1p7o69caLXsOSfJPJ6ghM=,ssl=True,abortConnect=False");
             var db = redis.GetDatabase();
             var key = latitude + ":" + longitude + ":" + radius;
 

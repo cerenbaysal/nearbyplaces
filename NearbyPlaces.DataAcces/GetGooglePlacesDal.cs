@@ -20,18 +20,18 @@ namespace NearbyPlaces.DataAccess
             // AIzaSyAG8PoYe0gktdubVb5zjQilr-KyVwF_iGA
             // AIzaSyDN1QX-gWUR-mIYo_D21PNFLHHpNQkIkGU
 
-            //using (var client = new WebClient())
-            //using (var stream = client.OpenRead(googleApiUrl))
-            //using (var reader = new StreamReader(stream))
-            //{
-            //    var jObject = Newtonsoft.Json.Linq.JObject.Parse(reader.ReadToEnd());
-            //    string r = "";
-            //    for (int i = 0; i < jObject["results"].Count(); i++)
-            //    {
-            //        r = (string)jObject["results"][i]["name"] + " - " + (string)jObject["results"][i]["vicinity"];
-            //        places.Add(r);
-            //    }
-            //}
+            using (var client = new WebClient())
+            using (var stream = client.OpenRead(googleApiUrl))
+            using (var reader = new StreamReader(stream))
+            {
+                var jObject = Newtonsoft.Json.Linq.JObject.Parse(reader.ReadToEnd());
+                string r = "";
+                for (int i = 0; i < jObject["results"].Count(); i++)
+                {
+                    r = (string)jObject["results"][i]["name"] + " - " + (string)jObject["results"][i]["vicinity"];
+                    places.Add(r);
+                }
+            }
 
             return places;
         }

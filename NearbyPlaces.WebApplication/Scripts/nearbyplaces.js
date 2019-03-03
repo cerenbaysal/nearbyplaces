@@ -19,20 +19,25 @@ app.controller("nearbyPlacesController", function ($scope) {
 
         $.ajax({
             type: "GET",
-            url: "http://localhost:62199/api/Places/GetNearbyPlaces?latitude=" + latitude + "&longitude=" + longitude + "&radius=" + radius,
+            url: "http://nearbyplaceswebapi.azurewebsites.net/api/Places/GetNearbyPlaces?latitude=" + latitude + "&longitude=" + longitude + "&radius=" + radius,
             contentType: "application/json; charset=utf-8",
             datatype: "json",
             async: false,
             success: function (data) {
-                for (var i = 0; i < data.Places.length; i++) {
-                    places.push(data.Places[i]);
+                if (data.Places == null) {
+                    alert("Could not reach to redis server!");
                 }
+                else {
+                    for (var i = 0; i < data.Places.length; i++) {
+                        places.push(data.Places[i]);
+                    }
 
-                if (places.length == 0) {
-                    alert("No places found!");
+                    if (places.length == 0) {
+                        alert("No places found!");
+                    }
+
+                    $scope.places = places;
                 }
-
-                $scope.places = places;
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert("An error occured when retrieving nearby places!");

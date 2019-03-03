@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    restart: always
+    
+  nearbyplaces.webapi:
+    image: nearbyplaces.webapi
+    build:
+      context: .\NearbyPlaces.WebApi
+      dockerfile: Dockerfile
+    ports:
+        - "62199:62199"
+    depends_on:
+        - redis
+    networks:
+      - webproxy
+
+  nearbyplaces.webapplication:
+    image: nearbyplaces.webapplication
+    build:
+      context: .\NearbyPlaces.WebApplication
+      dockerfile: Dockerfile
+    ports:
+        - "62222:62222"
+    depends_on: 
+        - nearbyplaces.webapi
+        - redis
+    networks:
+      - webproxy
